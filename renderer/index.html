@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Desktop Chat</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="titlebar">
+      <span id="title">Desktop Chat</span>
+      <div id="titlebar-actions">
+        <button id="btn-new" title="New chat">＋</button>
+        <button id="btn-settings" title="Settings">⚙</button>
+        <button id="btn-hide" title="Hide (Esc)">✕</button>
+      </div>
+    </div>
+
+    <div id="messages"></div>
+
+    <div id="composer">
+      <textarea id="input" rows="2" placeholder="Message… (Enter to send, Shift+Enter for newline)"></textarea>
+      <button id="btn-send">Send</button>
+      <button id="btn-stop" class="hidden">Stop</button>
+    </div>
+  </div>
+
+  <div id="settings-overlay" class="hidden">
+    <div id="settings-panel">
+      <h2>Settings</h2>
+      <label>API Endpoint (base URL)
+        <input id="s-endpoint" type="text" placeholder="https://api.openai.com/v1" />
+      </label>
+      <label>Model
+        <input id="s-model" type="text" placeholder="gpt-4o-mini" />
+      </label>
+      <label>API Key
+        <input id="s-apikey" type="password" placeholder="sk-…" />
+      </label>
+      <label class="checkbox-row">
+        <input id="s-confirm" type="checkbox" />
+        Confirm before write_file / edit_file / move_file
+      </label>
+      <label>Global hotkey
+        <input id="s-hotkey" type="text" placeholder="CommandOrControl+Shift+T" />
+      </label>
+      <p id="s-keystorage" class="hint"></p>
+      <div class="settings-actions">
+        <button id="s-cancel">Cancel</button>
+        <button id="s-save" class="primary">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="confirm-overlay" class="hidden">
+    <div id="confirm-panel">
+      <h3 id="confirm-title">Run tool?</h3>
+      <pre id="confirm-body"></pre>
+      <div class="settings-actions">
+        <button id="confirm-deny">Deny</button>
+        <button id="confirm-allow" class="primary">Allow</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

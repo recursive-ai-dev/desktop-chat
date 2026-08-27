@@ -51,6 +51,10 @@ function createWindow() {
 
   win.loadFile(path.join(__dirname, 'renderer', 'index.html'));
 
+  // Security: Restrict navigation and window creation
+  win.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
+  win.webContents.on('will-navigate', (e) => e.preventDefault());
+
   win.on('close', (e) => {
     if (!isQuitting) {
       e.preventDefault();

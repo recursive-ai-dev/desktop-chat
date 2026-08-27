@@ -69,7 +69,8 @@ async function edit_file({ path: rawPath, old_string, new_string, replace_all })
     throw new Error('old_string must not be empty');
   }
 
-  const occurrences = original.split(old_string).length - 1;
+  const parts = original.split(old_string);
+  const occurrences = parts.length - 1;
   if (occurrences === 0) {
     throw new Error('old_string not found in file');
   }
@@ -79,9 +80,7 @@ async function edit_file({ path: rawPath, old_string, new_string, replace_all })
     );
   }
 
-  const updated = replace_all
-    ? original.split(old_string).join(new_string ?? '')
-    : original.replace(old_string, new_string ?? '');
+  const updated = parts.join(new_string ?? '');
 
   await fsp.writeFile(target, updated, 'utf8');
   return `Edited ${target} (${occurrences} replacement${occurrences === 1 ? '' : 's'})`;

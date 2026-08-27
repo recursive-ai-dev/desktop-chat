@@ -81,7 +81,7 @@ async function edit_file({ path: rawPath, old_string, new_string, replace_all })
 
   const updated = replace_all
     ? original.split(old_string).join(new_string ?? '')
-    : original.replace(old_string, new_string ?? '');
+    : original.replace(old_string, () => new_string ?? '');
 
   await fsp.writeFile(target, updated, 'utf8');
   return `Edited ${target} (${occurrences} replacement${occurrences === 1 ? '' : 's'})`;

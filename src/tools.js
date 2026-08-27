@@ -56,7 +56,7 @@ async function read_file({ path: rawPath, offset, limit }) {
 async function write_file({ path: rawPath, content }) {
   const target = resolvePath(rawPath);
   await fsp.mkdir(path.dirname(target), { recursive: true });
-  const existed = fs.existsSync(target);
+  const existed = await fsp.access(target).then(() => true).catch(() => false);
   await fsp.writeFile(target, content ?? '', 'utf8');
   return `${existed ? 'Overwrote' : 'Created'} ${target} (${Buffer.byteLength(content ?? '', 'utf8')} bytes)`;
 }

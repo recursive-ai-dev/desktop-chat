@@ -5,9 +5,9 @@
   "main": "main.js",
   "private": true,
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "test": "node --test"
   },
-  "dependencies": {},
   "devDependencies": {
     "electron": "^33.0.0"
   },

@@ -247,4 +247,4 @@ async function runAgentTurn({ settings, messages, onEvent, confirmTool, signal }
   return { messages, finalText: '[stopped: too many tool-call turns]' };
 }
 
-module.exports = { runAgentTurn };
+module.exports = { runAgentTurn, trimHistory };

@@ -72,6 +72,7 @@ function save(settings) {
   }
 
   fs.writeFileSync(configPath(), JSON.stringify(out, null, 2), { mode: 0o600 });
+  fs.chmodSync(configPath(), 0o600);
   return load();
 }
 

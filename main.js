@@ -174,6 +174,7 @@ ipcMain.handle('chat:send', async (evt, userText) => {
     return { ok: false };
   }
 
+  if (currentAbort) currentAbort.abort();
   conversation.push({ role: 'user', content: userText });
   currentAbort = new AbortController();
 
